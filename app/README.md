@@ -1,62 +1,54 @@
 # ScripturePath — Dashboard
 
-React implementation of `project/Dashboard.dc.html` from the Claude Design handoff
-bundle in this repo.
+The dashboard from `project/Dashboard.dc.html` (Claude Design handoff), shipped two ways.
+Both are generated from the design file itself, so the markup is the design's own.
 
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # typecheck + production build
-npm run typecheck
+npm run build      # typecheck + production build into dist/
+npm run generate   # regenerate src/Dashboard.tsx from the design file
 ```
 
-## How it maps to the design
+## The two outputs
 
-| Design file | Here |
+| | What it is | Where |
+| --- | --- | --- |
+| React app | Vite + React + TS. `Dashboard.tsx` is transpiled from the design's DOM. | `app/` → `app/dist` |
+| Standalone page | One self-contained HTML file, no build step, no framework. | `standalone/index.html` |
+
+Regenerate either from the design:
+
+```bash
+node scripts/generate-dashboard.mjs   # -> src/Dashboard.tsx + hover rules in src/dashboard.css
+node scripts/generate-standalone.mjs  # -> ../standalone/index.html
+```
+
+## What "the same code" means here
+
+`Dashboard.tsx` is not a re-interpretation of the design — it is the design's markup,
+element for element, with every inline style value byte-identical. The generators only
+apply the changes the target syntax forces:
+
+| Design | Output |
 | --- | --- |
-| Inline styles on `<div>`s | Class names in `src/styles/global.css`, values transcribed 1:1 |
-| Palette repeated as hex literals | CSS custom properties on `:root` |
-| Inline `<svg>` glyphs | `src/components/icons.tsx` (same paths, viewBox, caps/joins) |
-| `{{ userName }}`, `{{ ringDash }}` etc. | Props fed from `src/data/mock.ts` |
-| `style-hover="…"` attributes | `:hover` rules on the matching class |
-| `<image-slot>` custom element | `src/components/ImageSlot.tsx` |
-| `data-props` tweaks (name, daily goal %) | Fields on `dashboardData` |
+| `style="a:b"` | React style object / unchanged in the standalone page |
+| `stroke-width` | `strokeWidth` (React only) |
+| `style-hover="a:b"` | `.hv-N:hover { a:b }` — HTML has no inline hover |
+| `{{ userName }}`, `{{ ringDash }}` … | values from the same arithmetic `DCLogic.renderVals()` ran |
+| `<image-slot>` | `ImageSlot` / a div, drawing the same dashed empty state |
 
-## Structure
-
-```
-src/
-  App.tsx                     page composition (sidebar + 2-column card grid)
-  data/types.ts               types for everything the dashboard renders
-  data/mock.ts                the design's copy and numbers — swap for an API
-  styles/global.css           tokens + all component styles
-  components/
-    Sidebar.tsx               brand, nav, verse card, profile row
-    VerseOfTheDay.tsx         holds the only stateful bit: the favourite heart
-    Header.tsx                greeting, search, notifications, New Study
-    TodaysProgressCard.tsx    ring + metrics + Continue Study
-    ProgressRing.tsx          172px donut gauge (r=76, 15px stroke)
-    WeeklyProgressCard.tsx    7-day streak row + weekly goal strip
-    ContinuePlanCard.tsx      plan cover, progress bar, next reading
-    StatsCard.tsx             4 stat tiles
-    RecentActivityCard.tsx    activity list
-    ToolsCard.tsx             4 quick-access tools
-    RootedBanner.tsx          dark green promo banner
-    Icon.tsx                  icon-key dispatcher + tinted tile
-    icons.tsx                 the SVG set
-    ImageSlot.tsx             image placeholder
-```
+Verified by rendering the design markup and each output in Chromium and diffing all
+279 elements — tag, text, box size and every computed style property. Zero differences.
 
 ## Notes
 
-- **Images.** The design's three `<image-slot>`s (avatar, plan cover, banner
-  illustration) shipped empty, so `ImageSlot` draws the same dashed empty state.
-  Set `user.avatarUrl`, `plan.coverUrl` and `banner.artUrl` in `mock.ts` to fill them.
-- **Fixed-width layout.** The main column keeps the design's `min-width: 1120px`,
-  so narrow viewports scroll rather than squeeze — this was an explicit fix in the
-  design chat, not an oversight.
-- **Interactivity.** Only what the design actually did: the Verse of the Day heart
-  toggles. Nav items, search and buttons are rendered as real `<button>`s (focusable,
-  labelled) but have no handlers yet.
-- **Fonts.** Source Serif 4 + DM Sans load from Google Fonts in `index.html`, matching
-  the design's `<helmet>`.
+- **Images.** The design's three `<image-slot>`s (avatar, plan cover, banner illustration)
+  shipped empty, so both outputs draw the dashed placeholder. Pass `src` to `ImageSlot`,
+  or drop an `<img>` into the standalone page, when the real art exists.
+- **Fixed-width layout.** The design sets `min-width: 1120px` on the content column, so
+  narrow viewports scroll rather than squeeze. That was a deliberate fix in the design
+  chat, and it is preserved.
+- **Interactivity.** Exactly what the design did: the Verse of the Day heart toggles.
+  Everything else is presentational, as designed.
+- **Fonts.** Source Serif 4 + DM Sans from Google Fonts, matching the design's `<helmet>`.

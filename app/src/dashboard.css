@@ -1,0 +1,104 @@
+/* Base rules copied from the <helmet> block of project/Dashboard.dc.html. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fbfaf6;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  color: #16452f;
+  text-decoration: none;
+}
+a:hover {
+  color: #d97b2e;
+}
+input {
+  font-family: inherit;
+}
+::placeholder {
+  color: #a09a8e;
+}
+
+/* Generated from the design's style-hover attributes — do not hand-edit,
+   `npm run generate` rewrites this block. */
+/* @generated:hover-start */
+.hv-1:hover { background:#F5F2EA; }
+.hv-2:hover { background:#F5F2EA; }
+.hv-3:hover { background:#F5F2EA; }
+.hv-4:hover { background:#F5F2EA; }
+.hv-5:hover { background:#F5F2EA; }
+.hv-6:hover { background:#F5F2EA; }
+.hv-7:hover { background:#F5F2EA; }
+.hv-8:hover { background:#F5F2EA; }
+.hv-9:hover { background:#0F3222; }
+.hv-10:hover { background:#0F3222; }
+.hv-11:hover { color:#D97B2E; }
+.hv-12:hover { background:#0F3222; }
+.hv-13:hover { border-color:#16452F; }
+.hv-14:hover { border-color:#16452F; }
+.hv-15:hover { border-color:#16452F; }
+.hv-16:hover { border-color:#16452F; }
+.hv-17:hover { background:rgba(255,255,255,0.1); }
+/* @generated:hover-end */
+
+/* <image-slot> stand-in. Mirrors the empty state drawn by image-slot.js:
+   a translucent frame, a dashed ring and a caption in the inherited colour. */
+.image-slot {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(127, 127, 127, 0.08);
+  container-type: size;
+}
+
+.image-slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-slot__ring {
+  position: absolute;
+  inset: 0;
+  border: 1.5px dashed currentColor;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.image-slot__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  text-align: center;
+  font: 13px/1.3 system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.image-slot__empty svg {
+  opacity: 0.45;
+}
+
+/* Small slots (the 42px avatar) keep the frame but drop the caption. */
+@container (max-width: 90px) {
+  .image-slot__empty span {
+    display: none;
+  }
+}
+
+@container (max-width: 48px) {
+  .image-slot__empty svg {
+    display: none;
+  }
+}
