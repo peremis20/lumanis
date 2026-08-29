@@ -34,6 +34,10 @@ export function versesOn(state: State, date: Date): number {
     .reduce((total, s) => total + s.verses, 0)
 }
 
+export function sessionsOn(state: State, date: Date) {
+  return state.sessions.filter((s) => isSameDay(s.at, date))
+}
+
 export function minutesToday(state: State): number {
   return minutesOn(state, new Date())
 }

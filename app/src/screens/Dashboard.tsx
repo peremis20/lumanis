@@ -22,6 +22,7 @@ import {
 import type { ActivityKind, StatsPeriod } from '../store/types'
 import { formatRange, PLANS } from '../data/plans'
 import { ImageSlot } from '../ImageSlot'
+import { DayDetail } from '../components/DayDetail'
 import { Modal } from '../components/Modal'
 import { TopBar } from '../components/TopBar'
 import { useToast } from '../components/Toast'
@@ -183,6 +184,7 @@ export function Dashboard() {
   const [plansOpen, setPlansOpen] = useState(false)
   const [weeklyGoalDraft, setWeeklyGoalDraft] = useState(state.settings.weeklyGoalDays)
   const [dailyGoalDraft, setDailyGoalDraft] = useState(state.settings.dailyGoalMinutes)
+  const [dayDetail, setDayDetail] = useState<Date | null>(null)
 
   const percent = dailyGoalPercent(state)
   const circumference = 2 * Math.PI * 76
@@ -283,7 +285,16 @@ export function Dashboard() {
           <div style={{ marginTop: '10px', fontSize: '14px', color: '#6E6A62' }}>{weeklyMessage}</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: '8px', marginTop: '26px' }}>
             {week.map((day) => (
-              <div key={day.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '11px' }} title={`${day.label}: ${formatMinutes(day.minutes)}`}>
+              <div
+                key={day.label}
+                role="button"
+                tabIndex={0}
+                aria-label={`${day.label}, ${formatMinutes(day.minutes)} studied`}
+                onKeyDown={(e) => e.key === 'Enter' && setDayDetail(day.date)}
+                onClick={() => setDayDetail(day.date)}
+                title={`${day.label}: ${formatMinutes(day.minutes)}`}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '11px', cursor: 'pointer' }}
+              >
                 {day.state === 'done' ? (
                   <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#E8862E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
@@ -334,7 +345,15 @@ export function Dashboard() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: '22px', marginTop: '22px' }}>
-            <ImageSlot id="plan-cover" shape="rounded" radius="12" placeholder="Plan cover" style={{ width: '94px', height: '140px', flex: 'none' }} />
+            <ImageSlot
+              id="plan-cover"
+              shape="rounded"
+              radius="12"
+              placeholder="Plan cover"
+              ariaLabel={`Open ${plan.plan.title}`}
+              onClick={() => navigate('#/learning/courses')}
+              style={{ width: '94px', height: '140px', flex: 'none' }}
+            />
             <div style={{ flex: '1', minWidth: '0', display: 'flex', flexDirection: 'column' }}>
               <div style={{ fontFamily: "'Source Serif 4',serif", fontSize: '20px', fontWeight: '600', color: '#22201C' }}>{plan.plan.title}</div>
               <div style={{ fontSize: '14px', color: '#6E6A62', marginTop: '5px' }}>
@@ -386,14 +405,18 @@ export function Dashboard() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '22px' }}>
             {[
-              { value: String(stats.chapters), label: 'Chapters Studied', tint: '#EAF1EC', color: '#1E6B45', glyph: ACTIVITY_ICON.read.glyph },
-              { value: formatMinutes(stats.minutes), label: 'Time Studied', tint: '#FDF1E4', color: '#E8862E', linejoin: false, glyph: (<><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></>) },
-              { value: String(stats.notes), label: 'Notes Created', tint: '#FDF6E7', color: '#D9A22E', glyph: ACTIVITY_ICON.highlight.glyph },
-              { value: String(stats.highlights), label: 'Highlights', tint: '#FDF6E7', color: '#D9A22E', glyph: ACTIVITY_ICON.favorite.glyph },
+              { value: String(stats.chapters), label: 'Chapters Studied', tint: '#EAF1EC', color: '#1E6B45', href: '#/learning/progress', glyph: ACTIVITY_ICON.read.glyph },
+              { value: formatMinutes(stats.minutes), label: 'Time Studied', tint: '#FDF1E4', color: '#E8862E', href: '#/learning/progress', linejoin: false, glyph: (<><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></>) },
+              { value: String(stats.notes), label: 'Notes Created', tint: '#FDF6E7', color: '#D9A22E', href: '#/library/notes', glyph: ACTIVITY_ICON.highlight.glyph },
+              { value: String(stats.highlights), label: 'Highlights', tint: '#FDF6E7', color: '#D9A22E', href: '#/library/notes?tab=highlights', glyph: ACTIVITY_ICON.favorite.glyph },
             ].map((stat) => (
               <div
                 key={stat.label}
-                style={{ display: 'flex', alignItems: 'center', gap: '15px', padding: '18px', border: '1px solid #EFEBE2', borderRadius: '12px' }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && navigate(stat.href)}
+                onClick={() => navigate(stat.href)}
+                style={{ display: 'flex', alignItems: 'center', gap: '15px', padding: '18px', border: '1px solid #EFEBE2', borderRadius: '12px', cursor: 'pointer' }}
               >
                 <div style={{ ...TILE, background: stat.tint }}>
                   <svg
@@ -516,6 +539,8 @@ export function Dashboard() {
           </div>
         </>
       )}
+
+      {dayDetail && <DayDetail date={dayDetail} onClose={() => setDayDetail(null)} />}
 
       {goalOpen && (
         <Modal title="Edit your goals" subtitle="Small and repeatable beats ambitious and abandoned." onClose={() => setGoalOpen(false)} width={460}>

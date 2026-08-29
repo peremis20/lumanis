@@ -17,6 +17,9 @@ export type ImageSlotProps = {
   /** Corner radius in px for shape="rounded"; string form matches the design's attribute. */
   radius?: number | string
   style?: CSSProperties
+  /** Makes the slot itself the control, rather than wrapping it in one. */
+  onClick?: () => void
+  ariaLabel?: string
 }
 
 function cornerRadius(shape: Shape, radius: number | string): string | undefined {
@@ -35,11 +38,22 @@ export function ImageSlot({
   shape = 'rounded',
   radius = 12,
   style,
+  onClick,
+  ariaLabel,
 }: ImageSlotProps) {
   const borderRadius = cornerRadius(shape, radius)
 
   return (
-    <div id={id} className="image-slot" style={{ ...style, borderRadius }}>
+    <div
+      id={id}
+      className="image-slot"
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      aria-label={ariaLabel}
+      onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
+      onClick={onClick}
+      style={{ ...style, borderRadius, ...(onClick ? { cursor: 'pointer' } : null) }}
+    >
       {src ? (
         <img src={src} alt={alt} />
       ) : (

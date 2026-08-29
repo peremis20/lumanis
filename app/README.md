@@ -35,7 +35,7 @@ Every item in the sidebar, and every control on every screen.
 
 | Screen | What it does |
 | --- | --- |
-| **Dashboard** | Ring, streak dots, stats and activity are all computed from your real study log. Continue Study opens the next reading; Edit Goal, the period switch, View Plan, View All, the four tools and Explore Plans are live. |
+| **Dashboard** | Ring, streak dots, stats and activity are all computed from your real study log. Continue Study opens the next reading; Edit Goal, the period switch, View Plan, View All, the four tools and Explore Plans are live. Clicking any weekday opens what happened that day — minutes, verses, notes, what you read — with a way back into the passage. |
 | **My Learning › My Courses** | Five courses, each with day-by-day readings and a reflection question. Tick days done, restart, enrol in another, jump into any reading. |
 | **My Learning › Continue Learning** | The next reading as one button, the course progress line, readings to revisit and any other course left part-way. |
 | **My Learning › Progress** | Period stats, current streak, a 14-day minutes chart, this week's days, the full activity log and every reading session. |
@@ -47,6 +47,11 @@ Every item in the sidebar, and every control on every screen.
 | **Favorites** | Saved verses with their text, copy, open, remove. |
 | **Settings** | Name, avatar, daily/weekly goals, change course, export your data, reset everything. |
 | **Top bar** | Search runs across all 31,102 verses plus your notes and the courses. Notifications open, mark read and dismiss. New Study opens the course picker. |
+
+Every interactive element is covered by `audit.mjs`, which clicks all 364 of them across
+15 screens and fails any that changes nothing. The only permitted no-ops are a nav item
+for the screen you are already on, an already-selected tab or map pin, and a genuinely
+disabled control (the reply button with an empty box, Next on a book's last chapter).
 
 State lives in `localStorage` under `scripturepath:v1` — notes, highlights, favourites,
 sessions, plan progress, posts and settings. Nothing is uploaded anywhere.
@@ -75,7 +80,11 @@ downloads when a reader, library or search first needs it.
 The dashboard is not a re-interpretation of the handoff — it is the design's own DOM.
 Verified by rendering the original design markup and the running app side by side in
 Chromium and diffing every element on tag, text, box size and every computed style
-property: **zero differences** across the dashboard's **209-element `<main>` column**.
+property. The dashboard's **209-element `<main>` column** matches on every one of them
+except `cursor`, which differs on 59 nodes: the weekly day markers, the stat tiles, the
+Verse of the Day text and the plan cover became clickable, and take the pointer cursor
+the design already uses for everything interactive. Nothing else differs — same nodes,
+same text, same boxes, same colours.
 
 The sidebar is the one deliberate departure: the handoff drew nine flat rows, and the
 product now groups them under My Learning and Library. Row metrics, colours and the

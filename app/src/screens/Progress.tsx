@@ -11,6 +11,7 @@ import {
   weekDays,
 } from '../store/derive'
 import type { StatsPeriod } from '../store/types'
+import { DayDetail } from '../components/DayDetail'
 import { TopBar } from '../components/TopBar'
 import { Screen } from '../components/Screen'
 
@@ -23,6 +24,7 @@ const PERIODS: Array<{ id: StatsPeriod; label: string }> = [
 export function Progress() {
   const { state } = useStore()
   const [period, setPeriod] = useState<StatsPeriod>('month')
+  const [dayDetail, setDayDetail] = useState<Date | null>(null)
 
   const stats = statsFor(state, period)
   const streak = currentStreak(state)
@@ -75,7 +77,14 @@ export function Progress() {
             const height = peak ? Math.round((point.minutes / peak) * 100) : 0
             const met = point.minutes >= state.settings.dailyGoalMinutes
             return (
-              <div key={point.date.toISOString()} className="sp-chart__col" title={`${formatDay(point.date)} · ${formatMinutes(point.minutes)}`}>
+              <button
+                key={point.date.toISOString()}
+                type="button"
+                className="sp-chart__col"
+                aria-label={`${formatDay(point.date)}, ${formatMinutes(point.minutes)}`}
+                onClick={() => setDayDetail(point.date)}
+                title={`${formatDay(point.date)} · ${formatMinutes(point.minutes)}`}
+              >
                 <div className="sp-chart__bar-track">
                   <div
                     className={`sp-chart__bar${met ? ' sp-chart__bar--met' : ''}`}
@@ -83,7 +92,7 @@ export function Progress() {
                   />
                 </div>
                 <div className="sp-chart__label">{formatDay(point.date)}</div>
-              </div>
+              </button>
             )
           })}
         </div>
@@ -97,10 +106,15 @@ export function Progress() {
         <div className="sp-card__title">This week</div>
         <div className="sp-week">
           {week.map((day) => (
-            <div key={day.label} className={`sp-week__day sp-week__day--${day.state}`}>
+            <button
+              key={day.label}
+              type="button"
+              className={`sp-week__day sp-week__day--${day.state}`}
+              onClick={() => setDayDetail(day.date)}
+            >
               <div className="sp-week__label">{day.label}</div>
               <div className="sp-week__minutes">{day.minutes ? formatMinutes(day.minutes) : '—'}</div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -150,6 +164,7 @@ export function Progress() {
         </table>
         {state.sessions.length === 0 && <div className="sp-empty">No sessions recorded yet.</div>}
       </div>
+      {dayDetail && <DayDetail date={dayDetail} onClose={() => setDayDetail(null)} />}
     </Screen>
   )
 }

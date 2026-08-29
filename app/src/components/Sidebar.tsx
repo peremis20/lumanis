@@ -267,7 +267,14 @@ export function Sidebar({ drawerOpen = false }: { drawerOpen?: boolean }) {
               <path d="M12 2.5v2M12 19.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6 18 18M6 18l1.4-1.4M16.6 7.4 18 6" />
             </svg>
           </div>
-          <div style={{ fontSize: '14px', lineHeight: '1.55', color: '#3F3B34', textWrap: 'pretty' }}>
+          <div
+            role="button"
+            tabIndex={0}
+            aria-label="Read Psalm 119 in context"
+            onKeyDown={(e) => e.key === 'Enter' && navigate('#/read/Psalms/119?verse=105')}
+            onClick={() => navigate('#/read/Psalms/119?verse=105')}
+            style={{ fontSize: '14px', lineHeight: '1.55', color: '#3F3B34', textWrap: 'pretty', cursor: 'pointer' }}
+          >
             {VERSE_OF_DAY.text}
           </div>
           <div style={{ fontSize: '12.5px', color: '#8B8579', marginTop: '11px' }}>{VERSE_OF_DAY.reference}</div>
