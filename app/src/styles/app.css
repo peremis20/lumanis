@@ -1585,3 +1585,191 @@ button {
   font-weight: 600;
   color: var(--orange-ink);
 }
+
+/* ------------------------------------------------------------- responsive */
+/* The handoff pins the content column at 1120px, which is right for the
+   desktop app and unusable below it. Under that width the sidebar becomes a
+   drawer and every fixed grid collapses. Inline styles from the design need
+   !important to be overridden here; nothing in this block applies at ≥1120px,
+   so the desktop rendering is untouched. */
+
+.sp-mobile-bar {
+  display: none;
+}
+
+@media (max-width: 1119px) {
+  .sp-mobile-bar {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 56px;
+    padding: 0 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sp-mobile-bar__brand {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: -0.2px;
+  }
+
+  .sp-burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    cursor: pointer;
+  }
+
+  .sp-sidebar {
+    position: fixed !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 75;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 180ms ease;
+  }
+
+  .sp-sidebar--open {
+    transform: none;
+    box-shadow: 0 0 60px rgba(18, 58, 40, 0.28);
+  }
+
+  .sp-nav-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: rgba(34, 32, 28, 0.36);
+  }
+
+  .sp-main {
+    min-width: 0 !important;
+    padding: 20px 16px 44px !important;
+    gap: 20px !important;
+  }
+
+  .sp-topbar {
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+
+  .sp-topbar__title {
+    white-space: normal !important;
+    font-size: 25px !important;
+  }
+
+  .sp-topbar__actions {
+    width: 100%;
+    flex-wrap: wrap;
+    padding-top: 0 !important;
+  }
+
+  .sp-search {
+    flex: 1;
+    width: auto !important;
+    min-width: 0;
+  }
+
+  .sp-dash-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sp-today-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sp-today-side {
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    min-width: 220px;
+  }
+
+  .sp-quick-tools {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .sp-rooted {
+    flex-wrap: wrap;
+  }
+
+  .sp-reader {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-stat-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sp-week {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sp-maps {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-chart {
+    grid-template-columns: repeat(7, 1fr);
+    height: 150px;
+  }
+
+  /* The last seven days are enough on a small screen. */
+  .sp-chart__col:nth-child(-n + 7) {
+    display: none;
+  }
+
+  .sp-input {
+    max-width: none;
+  }
+
+  .sp-plan-head,
+  .sp-entry__head {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sp-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .sp-card {
+    padding: 18px 16px 20px;
+  }
+
+  /* The ring and its metrics stop fitting side by side well before this. */
+  .sp-today-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .sp-today-side {
+    min-width: 0;
+  }
+
+  /* Banner: stack art, copy and the call to action. */
+  .sp-rooted {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+  }
+
+  .sp-rooted > div {
+    min-width: 0;
+  }
+}

@@ -70,9 +70,10 @@ export function TopBar({ title, subtitle }: TopBarProps) {
 
   return (
     <>
-      <header style={{ display: 'flex', alignItems: 'flex-start', gap: '24px' }}>
+      <header className="sp-topbar" style={{ display: 'flex', alignItems: 'flex-start', gap: '24px' }}>
         <div style={{ flex: '1', minWidth: '0' }}>
           <h1
+            className="sp-topbar__title"
             style={{ margin: '0', fontFamily: "'Source Serif 4',serif", fontSize: '31px', fontWeight: '600', letterSpacing: '-0.4px', color: '#16452F', whiteSpace: 'nowrap' }}
           >
             {title}
@@ -80,8 +81,9 @@ export function TopBar({ title, subtitle }: TopBarProps) {
           <div style={{ marginTop: '8px', fontSize: '14.5px', color: '#6E6A62' }}>{subtitle}</div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', paddingTop: '4px' }}>
+        <div className="sp-topbar__actions" style={{ display: 'flex', alignItems: 'center', gap: '16px', paddingTop: '4px' }}>
           <div
+            className="sp-search"
             style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '256px', height: '46px', padding: '0 16px', background: '#FFFFFF', border: '1px solid #ECE7DC', borderRadius: '11px' }}
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8B8579" strokeWidth="1.9" strokeLinecap="round">

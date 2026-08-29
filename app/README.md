@@ -51,6 +51,19 @@ Every item in the sidebar, and every control on every screen.
 State lives in `localStorage` under `scripturepath:v1` — notes, highlights, favourites,
 sessions, plan progress, posts and settings. Nothing is uploaded anywhere.
 
+The first-run demo content is dated relative to the day the app is first opened, and is
+rolled forward on later visits (`rollSeedForward` in `store/store.tsx`) so the weekly
+dots, the ring and the streak keep meaning something instead of ageing out of the
+current week. Records you create carry no `seeded` flag and are never moved.
+
+## Screens narrower than 1120px
+
+The handoff pins the content column at `min-width: 1120px`, which is right for the
+desktop app and unusable on a phone or in a narrow panel. Below that width the sidebar
+becomes a drawer behind a menu button and every fixed grid collapses to one column —
+all of it inside one `@media (max-width: 1119px)` block, so the desktop rendering the
+fidelity check measures is untouched.
+
 ## Scripture text
 
 The King James Version, which is in the public domain, via the `es-kjv` package

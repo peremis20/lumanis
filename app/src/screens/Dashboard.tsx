@@ -212,6 +212,7 @@ export function Dashboard() {
 
   return (
     <main
+      className="sp-main"
       style={{ flex: '1', minWidth: '1120px', padding: '34px 44px 44px', display: 'flex', flexDirection: 'column', gap: '26px' }}
     >
       <TopBar
@@ -219,11 +220,11 @@ export function Dashboard() {
         subtitle="Keep seeking. Keep growing. God is with you."
       />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'start' }}>
+      <div className="sp-dash-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'start' }}>
         {/* Today's Progress */}
         <section style={CARD}>
           <div style={CARD_TITLE}>Today's Progress</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '26px', marginTop: '20px' }}>
+          <div className="sp-today-row" style={{ display: 'flex', alignItems: 'center', gap: '26px', marginTop: '20px' }}>
             <div style={{ position: 'relative', width: '172px', height: '172px', flex: 'none' }}>
               <svg width="172" height="172" viewBox="0 0 172 172" style={{ transform: 'rotate(-90deg)' }}>
                 <circle cx="86" cy="86" r="76" fill="none" stroke="#EDEAE1" strokeWidth="15" />
@@ -237,7 +238,7 @@ export function Dashboard() {
                 <div style={{ fontSize: '12.5px', color: '#8B8579', marginTop: '6px' }}>Daily Goal</div>
               </div>
             </div>
-            <div style={{ flex: '1', minWidth: '0', borderLeft: '1px solid #ECE7DC', paddingLeft: '26px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div className="sp-today-side" style={{ flex: '1', minWidth: '0', borderLeft: '1px solid #ECE7DC', paddingLeft: '26px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                 <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3F3B34" strokeWidth="1.5" strokeLinecap="round">
                   <circle cx="12" cy="12" r="9" />
@@ -456,7 +457,7 @@ export function Dashboard() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <section style={CARD}>
             <div style={{ ...CARD_TITLE, paddingBottom: '20px', borderBottom: '1px solid #ECE7DC' }}>Tools Quick Access</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '14px', marginTop: '22px' }}>
+            <div className="sp-quick-tools" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '14px', marginTop: '22px' }}>
               {TOOLS.map((tool) => (
                 <div
                   key={tool.label}
@@ -473,7 +474,7 @@ export function Dashboard() {
             </div>
           </section>
 
-          <section style={{ display: 'flex', alignItems: 'center', gap: '24px', background: '#123A28', borderRadius: '16px', padding: '26px 30px' }}>
+          <section className="sp-rooted" style={{ display: 'flex', alignItems: 'center', gap: '24px', background: '#123A28', borderRadius: '16px', padding: '26px 30px' }}>
             <ImageSlot id="plant" shape="rounded" radius="10" placeholder="Illustration" style={{ width: '104px', height: '104px', flex: 'none' }} />
             <div style={{ flex: '1', minWidth: '0' }}>
               <div style={{ fontFamily: "'Source Serif 4',serif", fontSize: '20px', fontWeight: '600', color: '#FFFFFF' }}>Stay rooted in the Word</div>

@@ -14,6 +14,11 @@ export function uid(prefix = 'id'): string {
   return `${prefix}-${Date.now().toString(36)}-${counter.toString(36)}`
 }
 
+/** Local calendar day, e.g. "2026-08-29" — what the demo content is anchored to. */
+export function dayKey(date = new Date()): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+}
+
 /** A date N days back, at the given local time. */
 function daysAgo(days: number, hour = 9, minute = 0): string {
   const d = new Date()
@@ -77,11 +82,12 @@ export function seedState(): State {
     minutes,
     verses,
     ref: { book, chapter },
+    seeded: true,
   }))
 
   const notes: Note[] = NOTES.map(([d, h, book, chapter, verse, body]) => {
     const at = daysAgo(d, h, 12)
-    return { id: uid('note'), ref: { book, chapter, verse }, body, createdAt: at, updatedAt: at }
+    return { id: uid('note'), ref: { book, chapter, verse }, body, createdAt: at, updatedAt: at, seeded: true }
   })
 
   const highlights: Highlight[] = HIGHLIGHTS.map(([d, book, chapter, verse]) => ({
@@ -89,19 +95,20 @@ export function seedState(): State {
     ref: { book, chapter, verse },
     text: '',
     createdAt: daysAgo(d, 8, 15),
+    seeded: true,
   }))
 
   // The three entries the design shows, then older ones behind "View All".
   const activity: Activity[] = [
-    { id: uid('act'), kind: 'read', title: 'Read Philippians 4:1–7', at: daysAgo(0, 8, 30), href: '#/read/Philippians/4' },
-    { id: uid('act'), kind: 'highlight', title: 'Highlighted Philippians 4:6', at: daysAgo(0, 8, 15), href: '#/read/Philippians/4?verse=6' },
-    { id: uid('act'), kind: 'note', title: 'Added a note on Philippians 4:6', at: daysAgo(1, 22, 45), href: '#/library/notes' },
-    { id: uid('act'), kind: 'plan', title: 'Completed day 6 — Forgetting what is behind', at: daysAgo(1, 21, 40), href: '#/learning/courses' },
-    { id: uid('act'), kind: 'read', title: 'Read Philippians 3:12–21', at: daysAgo(1, 21, 10), href: '#/read/Philippians/3' },
-    { id: uid('act'), kind: 'read', title: 'Read Philippians 2:1–11', at: daysAgo(2, 7, 30), href: '#/read/Philippians/2' },
-    { id: uid('act'), kind: 'favorite', title: 'Saved Psalm 23:4 to favorites', at: daysAgo(4, 20, 55), href: '#/favorites' },
-    { id: uid('act'), kind: 'read', title: 'Read Psalm 23', at: daysAgo(4, 20, 30), href: '#/read/Psalms/23' },
-    { id: uid('act'), kind: 'note', title: 'Added a note on Psalm 42:11', at: daysAgo(8, 8, 20), href: '#/library/notes' },
+    { id: uid('act'), kind: 'read', title: 'Read Philippians 4:1–7', at: daysAgo(0, 8, 30), href: '#/read/Philippians/4', seeded: true },
+    { id: uid('act'), kind: 'highlight', title: 'Highlighted Philippians 4:6', at: daysAgo(0, 8, 15), href: '#/read/Philippians/4?verse=6', seeded: true },
+    { id: uid('act'), kind: 'note', title: 'Added a note on Philippians 4:6', at: daysAgo(1, 22, 45), href: '#/library/notes', seeded: true },
+    { id: uid('act'), kind: 'plan', title: 'Completed day 6 — Forgetting what is behind', at: daysAgo(1, 21, 40), href: '#/learning/courses', seeded: true },
+    { id: uid('act'), kind: 'read', title: 'Read Philippians 3:12–21', at: daysAgo(1, 21, 10), href: '#/read/Philippians/3', seeded: true },
+    { id: uid('act'), kind: 'read', title: 'Read Philippians 2:1–11', at: daysAgo(2, 7, 30), href: '#/read/Philippians/2', seeded: true },
+    { id: uid('act'), kind: 'favorite', title: 'Saved Psalm 23:4 to favorites', at: daysAgo(4, 20, 55), href: '#/favorites', seeded: true },
+    { id: uid('act'), kind: 'read', title: 'Read Psalm 23', at: daysAgo(4, 20, 30), href: '#/read/Psalms/23', seeded: true },
+    { id: uid('act'), kind: 'note', title: 'Added a note on Psalm 42:11', at: daysAgo(8, 8, 20), href: '#/library/notes', seeded: true },
   ]
 
   const posts: Post[] = [
@@ -112,6 +119,7 @@ export function seedState(): State {
       at: daysAgo(0, 7, 20),
       likes: 12,
       likedByMe: false,
+      seeded: true,
       replies: [
         { id: uid('reply'), author: 'Marcus T.', body: 'Two years here. The waiting has changed me more than the answer probably will.', at: daysAgo(0, 8, 5) },
       ],
@@ -123,6 +131,7 @@ export function seedState(): State {
       at: daysAgo(1, 19, 30),
       likes: 24,
       likedByMe: false,
+      seeded: true,
       replies: [],
     },
     {
@@ -132,6 +141,7 @@ export function seedState(): State {
       at: daysAgo(2, 12, 15),
       likes: 41,
       likedByMe: false,
+      seeded: true,
       replies: [
         { id: uid('reply'), author: 'Joy A.', body: 'Needed this today. Thank you.', at: daysAgo(2, 14, 2) },
         { id: uid('reply'), author: 'Sam K.', body: 'Same. Numbness is not the end of the story.', at: daysAgo(2, 16, 40) },
@@ -147,6 +157,7 @@ export function seedState(): State {
       at: daysAgo(0, 7, 0),
       href: '#/learning/courses',
       read: false,
+      seeded: true,
     },
     {
       id: uid('note-n'),
@@ -155,6 +166,7 @@ export function seedState(): State {
       at: daysAgo(0, 8, 45),
       href: '#/learning/progress',
       read: false,
+      seeded: true,
     },
     {
       id: uid('note-n'),
@@ -163,10 +175,12 @@ export function seedState(): State {
       at: daysAgo(0, 8, 5),
       href: '#/community',
       read: true,
+      seeded: true,
     },
   ]
 
   return {
+    seedDay: dayKey(),
     settings: { userName: 'Michael', avatarUrl: '', dailyGoalMinutes: 33, weeklyGoalDays: 5 },
     activePlanId: 'peace',
     planProgress: {
@@ -179,9 +193,9 @@ export function seedState(): State {
     notes,
     highlights,
     favorites: [
-      { id: uid('fav'), ref: { book: 'Psalms', chapter: 23, verse: 4 }, text: '', createdAt: daysAgo(4, 20, 55) },
-      { id: uid('fav'), ref: { book: 'Philippians', chapter: 4, verse: 7 }, text: '', createdAt: daysAgo(1, 22, 10) },
-      { id: uid('fav'), ref: { book: 'John', chapter: 14, verse: 27 }, text: '', createdAt: daysAgo(15, 8, 40) },
+      { id: uid('fav'), ref: { book: 'Psalms', chapter: 23, verse: 4 }, text: '', createdAt: daysAgo(4, 20, 55), seeded: true },
+      { id: uid('fav'), ref: { book: 'Philippians', chapter: 4, verse: 7 }, text: '', createdAt: daysAgo(1, 22, 10), seeded: true },
+      { id: uid('fav'), ref: { book: 'John', chapter: 14, verse: 27 }, text: '', createdAt: daysAgo(15, 8, 40), seeded: true },
     ],
     sessions,
     activity,

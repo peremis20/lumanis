@@ -131,7 +131,7 @@ function sectionForPath(path: string, query: URLSearchParams): string | null {
   return item?.match ?? null
 }
 
-export function Sidebar() {
+export function Sidebar({ drawerOpen = false }: { drawerOpen?: boolean }) {
   const route = useRoute()
   const { state, dispatch } = useStore()
   const toast = useToast()
@@ -156,6 +156,7 @@ export function Sidebar() {
 
   return (
     <aside
+      className={`sp-sidebar${drawerOpen ? ' sp-sidebar--open' : ''}`}
       style={{ width: '258px', flex: 'none', background: '#FFFFFF', borderRight: '1px solid #ECE7DC', display: 'flex', flexDirection: 'column', padding: '26px 20px 18px', gap: '26px' }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '11px', paddingLeft: '6px' }}>

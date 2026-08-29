@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from 'react'
 import { getPlan, formatRange, formatVerse } from '../data/plans'
-import { STORAGE_KEY, seedState, uid } from './seed'
+import { dayKey, STORAGE_KEY, seedState, uid } from './seed'
 import type { Activity, ChapterRef, Settings, State, VerseRef } from './types'
 
 export type Action =
@@ -263,13 +263,65 @@ export function reducer(state: State, action: Action): State {
   }
 }
 
+const DAY_MS = 86_400_000
+
+function shiftDate(iso: string, days: number): string {
+  return new Date(new Date(iso).getTime() + days * DAY_MS).toISOString()
+}
+
+/**
+ * Roll the first-run demo content forward to today.
+ *
+ * Seeded records are dated relative to the day the app was first opened. Left
+ * alone they fall out of "this week" as time passes, which empties the weekly
+ * dots, the ring and the streak — the dashboard looks broken through no fault
+ * of the person using it. Anything they created themselves carries no `seeded`
+ * flag and is never moved.
+ */
+function rollSeedForward(state: State, days: number): State {
+  const move = <T extends { seeded?: boolean }>(rows: T[], keys: Array<keyof T>): T[] =>
+    rows.map((row) => {
+      if (!row.seeded) return row
+      const next = { ...row }
+      for (const key of keys) {
+        const value = next[key]
+        if (typeof value === 'string') next[key] = shiftDate(value, days) as T[keyof T]
+      }
+      return next
+    })
+
+  return {
+    ...state,
+    seedDay: dayKey(),
+    sessions: move(state.sessions, ['at']),
+    notes: move(state.notes, ['createdAt', 'updatedAt']),
+    highlights: move(state.highlights, ['createdAt']),
+    favorites: move(state.favorites, ['createdAt']),
+    activity: move(state.activity, ['at']),
+    notifications: move(state.notifications, ['at']),
+    posts: move(state.posts, ['at']).map((post) =>
+      post.seeded
+        ? { ...post, replies: post.replies.map((r) => ({ ...r, at: shiftDate(r.at, days) })) }
+        : post,
+    ),
+  }
+}
+
 function load(): State {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return seedState()
+
     const parsed = JSON.parse(raw) as Partial<State>
+    const fresh = seedState()
     // Merge over a fresh seed so a stored state from an older build stays usable.
-    return { ...seedState(), ...parsed, settings: { ...seedState().settings, ...parsed.settings } }
+    const state: State = { ...fresh, ...parsed, settings: { ...fresh.settings, ...parsed.settings } }
+
+    const anchored = parsed.seedDay ?? fresh.seedDay
+    const drift = Math.round(
+      (new Date(`${fresh.seedDay}T00:00:00`).getTime() - new Date(`${anchored}T00:00:00`).getTime()) / DAY_MS,
+    )
+    return drift > 0 ? rollSeedForward(state, drift) : state
   } catch {
     return seedState()
   }

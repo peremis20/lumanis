@@ -6,6 +6,8 @@ export type Highlight = {
   ref: VerseRef
   text: string
   createdAt: string
+  /** First-run demo content; kept in step with today's date (see seed.ts). */
+  seeded?: boolean
 }
 
 export type Note = {
@@ -14,6 +16,7 @@ export type Note = {
   body: string
   createdAt: string
   updatedAt: string
+  seeded?: boolean
 }
 
 export type Favorite = {
@@ -21,6 +24,7 @@ export type Favorite = {
   ref: VerseRef
   text: string
   createdAt: string
+  seeded?: boolean
 }
 
 /** One finished reading. Minutes and verse counts feed every progress number. */
@@ -31,6 +35,7 @@ export type Session = {
   verses: number
   ref: ChapterRef
   planDayId?: string
+  seeded?: boolean
 }
 
 export type ActivityKind = 'read' | 'highlight' | 'note' | 'favorite' | 'plan' | 'community'
@@ -42,6 +47,7 @@ export type Activity = {
   at: string
   /** Hash route this entry opens when clicked. */
   href?: string
+  seeded?: boolean
 }
 
 export type PlanProgress = {
@@ -60,6 +66,7 @@ export type Post = {
   likes: number
   likedByMe: boolean
   replies: Reply[]
+  seeded?: boolean
 }
 
 export type Notification = {
@@ -69,6 +76,7 @@ export type Notification = {
   at: string
   href?: string
   read: boolean
+  seeded?: boolean
 }
 
 export type Settings = {
@@ -79,6 +87,8 @@ export type Settings = {
 }
 
 export type State = {
+  /** Local date (YYYY-MM-DD) the demo content is anchored to. */
+  seedDay: string
   settings: Settings
   activePlanId: string
   planProgress: Record<string, PlanProgress>

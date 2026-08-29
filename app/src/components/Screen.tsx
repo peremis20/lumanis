@@ -7,6 +7,7 @@ import type { ReactNode } from 'react'
 export function Screen({ children }: { children: ReactNode }) {
   return (
     <main
+      className="sp-main"
       style={{ flex: '1', minWidth: '1120px', padding: '34px 44px 44px', display: 'flex', flexDirection: 'column', gap: '26px' }}
     >
       {children}
