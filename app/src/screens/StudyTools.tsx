@@ -5,15 +5,15 @@ import { TopBar } from '../components/TopBar'
 import { Screen } from '../components/Screen'
 
 const TOOLS = [
-  { id: 'library', label: 'Study Bible', href: '#/library', detail: 'Read any book and chapter, highlight as you go.' },
-  { id: 'commentaries', label: 'Commentaries', href: '#/tools/commentaries', detail: 'Short, plain notes on the passages these plans use.' },
-  { id: 'maps', label: 'Bible Maps', href: '#/tools/maps', detail: 'Where the events happened, and why the place matters.' },
-  { id: 'dictionary', label: 'Dictionary', href: '#/tools/dictionary', detail: 'Words the Bible uses differently than we do.' },
+  { id: 'library', label: 'Study Bible', href: '#/library/bible', detail: 'Read any book and chapter, highlight as you go.' },
+  { id: 'commentaries', label: 'Commentaries', href: '#/library/tools/commentaries', detail: 'Short, plain notes on the passages these plans use.' },
+  { id: 'maps', label: 'Bible Maps', href: '#/library/tools/maps', detail: 'Where the events happened, and why the place matters.' },
+  { id: 'dictionary', label: 'Dictionary', href: '#/library/tools/dictionary', detail: 'Words the Bible uses differently than we do.' },
 ]
 
 export function StudyTools() {
   const route = useRoute()
-  const tool = route.segments[1]
+  const tool = route.segments[2]
 
   if (tool === 'commentaries') return <Commentaries />
   if (tool === 'maps') return <Maps />
@@ -55,7 +55,7 @@ function Commentaries() {
       <TopBar title="Commentaries" subtitle="Notes on the passages these plans lean on." />
       <div className="sp-card">
         <div className="sp-toolbar">
-          <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/tools')}>
+          <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/library/tools')}>
             ← Study Tools
           </button>
           <input
@@ -103,7 +103,7 @@ function Maps() {
       <TopBar title="Bible Maps" subtitle="Twelve places, and what happened in them." />
       <div className="sp-card">
         <div className="sp-toolbar">
-          <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/tools')}>
+          <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/library/tools')}>
             ← Study Tools
           </button>
         </div>
@@ -163,7 +163,7 @@ function Dictionary() {
       <TopBar title="Dictionary" subtitle="Words the Bible uses differently than we do." />
       <div className="sp-card">
         <div className="sp-toolbar">
-          <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/tools')}>
+          <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/library/tools')}>
             ← Study Tools
           </button>
           <input

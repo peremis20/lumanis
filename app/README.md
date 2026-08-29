@@ -10,23 +10,43 @@ npm run build          # typecheck + production build → dist/
 npm run build:single   # one self-contained HTML file → ../standalone/scripturepath.html
 ```
 
+## Navigation
+
+Six destinations; two of them open into sub-sections.
+
+```
+Dashboard
+My Learning ─ My Courses · Continue Learning · Progress
+Library     ─ Bible · Study Tools · Notes & Highlights
+Community
+Favorites
+Settings
+```
+
+A parent row opens its section and lands on its first screen; the chevron collapses it.
+The section holding the current screen opens itself, and a chapter opened from a course
+counts as My Learning while one opened from the Bible counts as Library. Routes from the
+earlier flat nav (`#/plan`, `#/progress`, `#/notes`, `#/tools/…`, `#/library`) redirect to
+their new homes, so old links and stored activity entries still work.
+
 ## What works
 
-Everything in the sidebar, and every control on every screen.
+Every item in the sidebar, and every control on every screen.
 
 | Screen | What it does |
 | --- | --- |
 | **Dashboard** | Ring, streak dots, stats and activity are all computed from your real study log. Continue Study opens the next reading; Edit Goal, the period switch, View Plan, View All, the four tools and Explore Plans are live. |
-| **My Plan** | Five plans, each with day-by-day readings and a reflection question. Tick days done, restart, switch plan, jump into any reading. |
-| **Bible Library** | The complete King James Version — 66 books, 1,189 chapters — filterable by testament or name, chapter picker into the reader. |
-| **Reader** | Real scripture text. Tap a verse to highlight, note, favourite or copy it. A session timer runs while you read; marking the day complete writes the session, advances the plan and moves every number on the dashboard. |
-| **Study Tools** | Commentaries (searchable, jump to the passage), Bible Maps (interactive place plate), Dictionary (searchable terms). |
-| **Progress** | Period stats, current streak, a 14-day minutes chart, this week's days, the full activity log and every reading session. |
-| **Notes & Highlights** | Create, edit, delete and search notes; open any note or highlight at its verse; remove highlights. |
-| **Favorites** | Saved verses with their text, copy, open, remove. |
+| **My Learning › My Courses** | Five courses, each with day-by-day readings and a reflection question. Tick days done, restart, enrol in another, jump into any reading. |
+| **My Learning › Continue Learning** | The next reading as one button, the course progress line, readings to revisit and any other course left part-way. |
+| **My Learning › Progress** | Period stats, current streak, a 14-day minutes chart, this week's days, the full activity log and every reading session. |
+| **Library › Bible** | The complete King James Version — 66 books, 1,189 chapters — filterable by testament or name, chapter picker into the reader. |
+| **Library › Study Tools** | Commentaries (searchable, jump to the passage), Bible Maps (interactive place plate), Dictionary (searchable terms). |
+| **Library › Notes & Highlights** | Create, edit, delete and search notes; open any note or highlight at its verse; remove highlights. |
+| **Reader** | Real scripture text. Tap a verse to highlight, note, favourite or copy it. A session timer runs while you read; marking the day complete writes the session, advances the course and moves every number on the dashboard. |
 | **Community** | Post, like, reply, delete your own posts. Local to the device. |
-| **Settings** | Name, avatar, daily/weekly goals, change plan, export your data, reset everything. |
-| **Top bar** | Search runs across all 31,102 verses plus your notes and the plans. Notifications open, mark read and dismiss. New Study opens the plan picker. |
+| **Favorites** | Saved verses with their text, copy, open, remove. |
+| **Settings** | Name, avatar, daily/weekly goals, change course, export your data, reset everything. |
+| **Top bar** | Search runs across all 31,102 verses plus your notes and the courses. Notifications open, mark read and dismiss. New Study opens the course picker. |
 
 State lives in `localStorage` under `scripturepath:v1` — notes, highlights, favourites,
 sessions, plan progress, posts and settings. Nothing is uploaded anywhere.
@@ -41,8 +61,13 @@ downloads when a reader, library or search first needs it.
 
 The dashboard is not a re-interpretation of the handoff — it is the design's own DOM.
 Verified by rendering the original design markup and the running app side by side in
-Chromium and diffing **all 279 elements** on tag, text, box size and every computed
-style property: **zero differences**.
+Chromium and diffing every element on tag, text, box size and every computed style
+property: **zero differences** across the dashboard's **209-element `<main>` column**.
+
+The sidebar is the one deliberate departure: the handoff drew nine flat rows, and the
+product now groups them under My Learning and Library. Row metrics, colours and the
+active treatment are still the design's, and the check is scoped to `<main>` for that
+reason.
 
 Keeping that true while the screen became functional meant a few deliberate choices:
 
@@ -72,8 +97,9 @@ app/
     store/                  types, seed data, reducer + persistence, derived selectors
     data/                   KJV loader, study plans, commentary/places/dictionary
     components/             Sidebar, TopBar, Screen, Modal, Toast, ImageSlot
-    screens/                Dashboard, MyPlan, Library, Reader, StudyTools,
-                            Progress, Notes, Favorites, Community, Settings
+    screens/                Dashboard, Courses, ContinueLearning, Progress,
+                            Library, Reader, StudyTools, Notes, Favorites,
+                            Community, Settings
     dashboard.css           the design's base rules + its style-hover rules
     styles/app.css          everything the other screens need, in the design's palette
   scripts/

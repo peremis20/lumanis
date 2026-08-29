@@ -190,7 +190,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
               <div className="sp-panel__group">
                 <div className="sp-panel__label">Study plans</div>
                 {results.plans.map((p) => (
-                  <button key={p.id} type="button" className="sp-result" onClick={() => go('#/plan?plan=' + p.id)}>
+                  <button key={p.id} type="button" className="sp-result" onClick={() => go('#/learning/courses?plan=' + p.id)}>
                     <span className="sp-result__title">{p.title}</span>
                     <span className="sp-result__meta">{p.forWhom}</span>
                   </button>
@@ -201,7 +201,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
               <div className="sp-panel__group">
                 <div className="sp-panel__label">Your notes</div>
                 {results.notes.map((n) => (
-                  <button key={n.id} type="button" className="sp-result" onClick={() => go('#/notes')}>
+                  <button key={n.id} type="button" className="sp-result" onClick={() => go('#/library/notes')}>
                     <span className="sp-result__title">{n.ref ? formatVerse(n.ref) : 'Note'}</span>
                     <span className="sp-result__meta">{n.body.slice(0, 70)}</span>
                   </button>
@@ -250,8 +250,8 @@ export function TopBar({ title, subtitle }: TopBarProps) {
                   onClick={() => {
                     dispatch({ type: 'plan/activate', planId: plan.id })
                     setPlanPickerOpen(false)
-                    toast(`${plan.title} is now your plan`)
-                    navigate('#/plan')
+                    toast(`You are enrolled in ${plan.title}`)
+                    navigate('#/learning/courses')
                   }}
                 >
                   <div className="sp-plan-card__title">{plan.title}</div>
@@ -260,7 +260,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
                   </div>
                   <div className="sp-plan-card__for">{plan.forWhom}</div>
                   <div className="sp-plan-card__summary">{plan.summary}</div>
-                  {active && <div className="sp-plan-card__badge">Current plan</div>}
+                  {active && <div className="sp-plan-card__badge">Current course</div>}
                 </button>
               )
             })}

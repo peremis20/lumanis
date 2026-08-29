@@ -91,7 +91,7 @@ export function Reader() {
       })
     }
     toast(`Logged ${minutes} min · ${counted} verses`)
-    navigate(planDay ? '#/plan' : '#/')
+    navigate(planDay ? '#/learning/courses' : '#/')
   }
 
   const title = `${book === 'Psalms' ? 'Psalm' : book} ${chapter}`
@@ -110,7 +110,7 @@ export function Reader() {
       <div className="sp-reader">
         <div className="sp-card sp-reader__text">
           <div className="sp-reader__bar">
-            <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/library')}>
+            <button type="button" className="sp-btn sp-btn--ghost" onClick={() => navigate('#/library/bible')}>
               ← Library
             </button>
             <div className="sp-reader__nav">

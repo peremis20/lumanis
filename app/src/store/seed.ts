@@ -95,13 +95,13 @@ export function seedState(): State {
   const activity: Activity[] = [
     { id: uid('act'), kind: 'read', title: 'Read Philippians 4:1–7', at: daysAgo(0, 8, 30), href: '#/read/Philippians/4' },
     { id: uid('act'), kind: 'highlight', title: 'Highlighted Philippians 4:6', at: daysAgo(0, 8, 15), href: '#/read/Philippians/4?verse=6' },
-    { id: uid('act'), kind: 'note', title: 'Added a note on Philippians 4:6', at: daysAgo(1, 22, 45), href: '#/notes' },
-    { id: uid('act'), kind: 'plan', title: 'Completed day 6 — Forgetting what is behind', at: daysAgo(1, 21, 40), href: '#/plan' },
+    { id: uid('act'), kind: 'note', title: 'Added a note on Philippians 4:6', at: daysAgo(1, 22, 45), href: '#/library/notes' },
+    { id: uid('act'), kind: 'plan', title: 'Completed day 6 — Forgetting what is behind', at: daysAgo(1, 21, 40), href: '#/learning/courses' },
     { id: uid('act'), kind: 'read', title: 'Read Philippians 3:12–21', at: daysAgo(1, 21, 10), href: '#/read/Philippians/3' },
     { id: uid('act'), kind: 'read', title: 'Read Philippians 2:1–11', at: daysAgo(2, 7, 30), href: '#/read/Philippians/2' },
     { id: uid('act'), kind: 'favorite', title: 'Saved Psalm 23:4 to favorites', at: daysAgo(4, 20, 55), href: '#/favorites' },
     { id: uid('act'), kind: 'read', title: 'Read Psalm 23', at: daysAgo(4, 20, 30), href: '#/read/Psalms/23' },
-    { id: uid('act'), kind: 'note', title: 'Added a note on Psalm 42:11', at: daysAgo(8, 8, 20), href: '#/notes' },
+    { id: uid('act'), kind: 'note', title: 'Added a note on Psalm 42:11', at: daysAgo(8, 8, 20), href: '#/library/notes' },
   ]
 
   const posts: Post[] = [
@@ -145,7 +145,7 @@ export function seedState(): State {
       title: 'Today’s reading is waiting',
       detail: 'Day 7 of Peace for Anxious Hearts — Philippians 4:4–9.',
       at: daysAgo(0, 7, 0),
-      href: '#/plan',
+      href: '#/learning/courses',
       read: false,
     },
     {
@@ -153,7 +153,7 @@ export function seedState(): State {
       title: 'You are 8 minutes from your daily goal',
       detail: '25 of 33 minutes studied today.',
       at: daysAgo(0, 8, 45),
-      href: '#/progress',
+      href: '#/learning/progress',
       read: false,
     },
     {

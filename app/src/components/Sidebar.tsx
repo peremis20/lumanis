@@ -1,11 +1,11 @@
 /**
- * Sidebar — the design's <aside>, style for style, with every row wired.
+ * Sidebar — six destinations, two of which open into sub-sections.
  *
- * The nav rows in the design are nine repetitions of one style object with a
- * different glyph, so they are built from a list here; the active row keeps the
- * design's own treatment (dark ground, currentColor glyph at 1.8 stroke).
+ * The row styling is the handoff design's: same metrics, same active
+ * treatment (dark ground, currentColor glyph at 1.8 stroke). Sub-rows are a
+ * new, quieter tier that indents to the parent's label.
  */
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { navigate, useRoute } from '../router'
 import { useStore } from '../store/store'
 import { ImageSlot } from '../ImageSlot'
@@ -19,10 +19,20 @@ const VERSE_OF_DAY = {
   verse: 105,
 }
 
-type NavItem = { label: string; href: string; match: string; glyph: ReactNode }
+type NavChild = { label: string; href: string; match: string }
+
+type NavItem = {
+  id: string
+  label: string
+  href: string
+  match: string
+  glyph: ReactNode
+  children?: NavChild[]
+}
 
 const NAV: NavItem[] = [
   {
+    id: 'dashboard',
     label: 'Dashboard',
     href: '#/',
     match: '/',
@@ -34,19 +44,27 @@ const NAV: NavItem[] = [
     ),
   },
   {
-    label: 'My Plan',
-    href: '#/plan',
-    match: '/plan',
+    id: 'learning',
+    label: 'My Learning',
+    href: '#/learning/courses',
+    match: '/learning',
     glyph: (
       <>
-        <rect x="3" y="5" width="18" height="16" rx="3" />
-        <path d="M3 10h18M8 3v4M16 3v4" />
+        <path d="M12 7.5 3.5 4.5 12 1.5l8.5 3z" />
+        <path d="M6 9.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3V9.5" />
+        <path d="M20.5 4.5v6" />
       </>
     ),
+    children: [
+      { label: 'My Courses', href: '#/learning/courses', match: '/learning/courses' },
+      { label: 'Continue Learning', href: '#/learning/continue', match: '/learning/continue' },
+      { label: 'Progress', href: '#/learning/progress', match: '/learning/progress' },
+    ],
   },
   {
-    label: 'Bible Library',
-    href: '#/library',
+    id: 'library',
+    label: 'Library',
+    href: '#/library/bible',
     match: '/library',
     glyph: (
       <>
@@ -54,37 +72,14 @@ const NAV: NavItem[] = [
         <path d="M20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z" />
       </>
     ),
+    children: [
+      { label: 'Bible', href: '#/library/bible', match: '/library/bible' },
+      { label: 'Study Tools', href: '#/library/tools', match: '/library/tools' },
+      { label: 'Notes & Highlights', href: '#/library/notes', match: '/library/notes' },
+    ],
   },
   {
-    label: 'Study Tools',
-    href: '#/tools',
-    match: '/tools',
-    glyph: <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z" />,
-  },
-  {
-    label: 'Progress',
-    href: '#/progress',
-    match: '/progress',
-    glyph: (
-      <>
-        <path d="M3 17l6-6 4 3 8-8" />
-        <path d="M16 6h5v5" />
-      </>
-    ),
-  },
-  {
-    label: 'Notes & Highlights',
-    href: '#/notes',
-    match: '/notes',
-    glyph: <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z" />,
-  },
-  {
-    label: 'Favorites',
-    href: '#/favorites',
-    match: '/favorites',
-    glyph: <path d="M12 4l2.5 5.2 5.5.8-4 3.9 1 5.6-5-2.9-5 2.9 1-5.6-4-3.9 5.5-.8z" />,
-  },
-  {
+    id: 'community',
     label: 'Community',
     href: '#/community',
     match: '/community',
@@ -97,6 +92,14 @@ const NAV: NavItem[] = [
     ),
   },
   {
+    id: 'favorites',
+    label: 'Favorites',
+    href: '#/favorites',
+    match: '/favorites',
+    glyph: <path d="M12 4l2.5 5.2 5.5.8-4 3.9 1 5.6-5-2.9-5 2.9 1-5.6-4-3.9 5.5-.8z" />,
+  },
+  {
+    id: 'settings',
     label: 'Settings',
     href: '#/settings',
     match: '/settings',
@@ -109,6 +112,7 @@ const NAV: NavItem[] = [
   },
 ]
 
+/** The design's nav row. */
 const ROW = {
   display: 'flex',
   alignItems: 'center',
@@ -120,13 +124,25 @@ const ROW = {
   cursor: 'pointer',
 } as const
 
+/** Reading a chapter belongs to whichever section sent you there. */
+function sectionForPath(path: string, query: URLSearchParams): string | null {
+  if (path.startsWith('/read')) return query.get('day') ? '/learning' : '/library'
+  const item = NAV.find((n) => (n.match === '/' ? path === '/' : path.startsWith(n.match)))
+  return item?.match ?? null
+}
+
 export function Sidebar() {
   const route = useRoute()
   const { state, dispatch } = useStore()
   const toast = useToast()
 
-  const active = (item: NavItem) =>
-    item.match === '/' ? route.path === '/' : route.path.startsWith(item.match)
+  const section = sectionForPath(route.path, route.query)
+  const [open, setOpen] = useState<string | null>(section)
+
+  // Following a link into a section opens that section.
+  useEffect(() => {
+    if (section) setOpen(section)
+  }, [section])
 
   const shareVerse = async () => {
     const text = `“${VERSE_OF_DAY.text}” — ${VERSE_OF_DAY.reference}`
@@ -156,33 +172,84 @@ export function Sidebar() {
         </div>
       </div>
 
-      <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      <nav className="sp-nav" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
         {NAV.map((item) => {
-          const on = active(item)
+          const on = section === item.match
+          const expanded = item.children ? open === item.match : false
           return (
-            <div
-              key={item.label}
-              role="link"
-              tabIndex={0}
-              aria-current={on ? 'page' : undefined}
-              className={on ? undefined : 'sp-nav-row'}
-              onKeyDown={(e) => e.key === 'Enter' && navigate(item.href)}
-              onClick={() => navigate(item.href)}
-              style={on ? { ...ROW, background: '#16452F', color: '#FFFFFF' } : { ...ROW, color: '#3F3B34' }}
-            >
-              <svg
-                width="19"
-                height="19"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke={on ? 'currentColor' : '#5C7566'}
-                strokeWidth={on ? '1.8' : '1.7'}
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <div key={item.id}>
+              <div
+                role="link"
+                tabIndex={0}
+                aria-current={on ? 'page' : undefined}
+                aria-expanded={item.children ? expanded : undefined}
+                className={on ? undefined : 'sp-nav-row'}
+                onKeyDown={(e) => e.key === 'Enter' && navigate(item.href)}
+                onClick={() => {
+                  // Opens the section and goes to its first screen. Collapsing
+                  // is the chevron's job, so a second click never hides the
+                  // sub-nav you are currently using.
+                  if (item.children) setOpen(item.match)
+                  navigate(item.href)
+                }}
+                style={on ? { ...ROW, background: '#16452F', color: '#FFFFFF' } : { ...ROW, color: '#3F3B34' }}
               >
-                {item.glyph}
-              </svg>
-              {item.label}
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke={on ? 'currentColor' : '#5C7566'}
+                  strokeWidth={on ? '1.8' : '1.7'}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {item.glyph}
+                </svg>
+                <span style={{ flex: 1 }}>{item.label}</span>
+                {item.children && (
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={on ? 'currentColor' : '#A09A8E'}
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    role="button"
+                    aria-label={expanded ? `Collapse ${item.label}` : `Expand ${item.label}`}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setOpen(expanded ? null : item.match)
+                    }}
+                    style={{ transform: expanded ? 'rotate(180deg)' : 'none', transition: 'transform 140ms ease' }}
+                  >
+                    <path d="M6 9.5l6 6 6-6" />
+                  </svg>
+                )}
+              </div>
+
+              {item.children && expanded && (
+                <div className="sp-subnav">
+                  {item.children.map((child) => {
+                    const childOn = route.path.startsWith(child.match)
+                    return (
+                      <div
+                        key={child.href}
+                        role="link"
+                        tabIndex={0}
+                        aria-current={childOn ? 'page' : undefined}
+                        className={`sp-subnav__row${childOn ? ' sp-subnav__row--on' : ''}`}
+                        onKeyDown={(e) => e.key === 'Enter' && navigate(child.href)}
+                        onClick={() => navigate(child.href)}
+                      >
+                        {child.label}
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           )
         })}
@@ -249,6 +316,9 @@ export function Sidebar() {
         </div>
 
         <div
+          role="link"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && navigate('#/settings')}
           onClick={() => navigate('#/settings')}
           style={{ display: 'flex', alignItems: 'center', gap: '12px', paddingTop: '16px', borderTop: '1px solid #ECE7DC', cursor: 'pointer' }}
         >

@@ -117,7 +117,7 @@ export function Settings() {
       </div>
 
       <div className="sp-card">
-        <div className="sp-card__title">Current plan</div>
+        <div className="sp-card__title">Current course</div>
         <div className="sp-plan-grid">
           {PLANS.map((plan) => (
             <button
@@ -126,7 +126,7 @@ export function Settings() {
               className={`sp-plan-card${plan.id === state.activePlanId ? ' sp-plan-card--active' : ''}`}
               onClick={() => {
                 dispatch({ type: 'plan/activate', planId: plan.id })
-                toast(`${plan.title} is now your plan`)
+                toast(`You are enrolled in ${plan.title}`)
               }}
             >
               <div className="sp-plan-card__title">{plan.title}</div>
@@ -134,7 +134,7 @@ export function Settings() {
                 {plan.book} · {plan.days.length} days
               </div>
               <div className="sp-plan-card__for">{plan.forWhom}</div>
-              {plan.id === state.activePlanId && <div className="sp-plan-card__badge">Current plan</div>}
+              {plan.id === state.activePlanId && <div className="sp-plan-card__badge">Current course</div>}
             </button>
           ))}
         </div>

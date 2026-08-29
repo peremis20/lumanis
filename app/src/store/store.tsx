@@ -56,7 +56,7 @@ export function reducer(state: State, action: Action): State {
         activity: logActivity(state, {
           kind: 'note',
           title: action.ref ? `Added a note on ${formatVerse(action.ref)}` : 'Added a note',
-          href: '#/notes',
+          href: '#/library/notes',
         }),
       }
     }
@@ -160,7 +160,7 @@ export function reducer(state: State, action: Action): State {
         activity: logActivity(state, {
           kind: 'plan',
           title: `Started ${getPlan(action.planId).title}`,
-          href: '#/plan',
+          href: '#/learning/courses',
         }),
       }
     }
@@ -186,7 +186,7 @@ export function reducer(state: State, action: Action): State {
             : logActivity(state, {
                 kind: 'plan',
                 title: `Completed day ${plan.days.indexOf(day) + 1} — ${day.title}`,
-                href: '#/plan',
+                href: '#/learning/courses',
               }),
       }
     }

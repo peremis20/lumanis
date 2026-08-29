@@ -1,12 +1,12 @@
 import { navigate, readerHref, useRoute } from '../router'
 import { useStore } from '../store/store'
 import { planState } from '../store/derive'
-import { formatRange, getPlan, PLANS } from '../data/plans'
+import { formatRange, PLANS } from '../data/plans'
 import { TopBar } from '../components/TopBar'
 import { Screen } from '../components/Screen'
 import { useToast } from '../components/Toast'
 
-export function MyPlan() {
+export function Courses() {
   const route = useRoute()
   const { state, dispatch } = useStore()
   const toast = useToast()
@@ -19,10 +19,10 @@ export function MyPlan() {
   return (
     <Screen>
       <TopBar
-        title={isActive ? 'My Plan' : view.plan.title}
+        title={isActive ? 'My Courses' : view.plan.title}
         subtitle={
           isActive
-            ? 'One reading at a time. Missing a day does not end the plan.'
+            ? 'One reading at a time. Missing a day does not end the course.'
             : `Preview · ${view.plan.days.length} days`
         }
       />
@@ -43,11 +43,11 @@ export function MyPlan() {
                 className="sp-btn"
                 onClick={() => {
                   dispatch({ type: 'plan/activate', planId: viewingId })
-                  toast(`${view.plan.title} is now your plan`)
-                  navigate('#/plan')
+                  toast(`You are enrolled in ${view.plan.title}`)
+                  navigate('#/learning/courses')
                 }}
               >
-                Make this my plan
+                Enrol in this course
               </button>
             )}
             {isActive && view.nextDay && (
@@ -72,7 +72,7 @@ export function MyPlan() {
                 className="sp-btn sp-btn--ghost"
                 onClick={() => {
                   dispatch({ type: 'plan/restart', planId: viewingId })
-                  toast('Plan restarted')
+                  toast('Course restarted')
                 }}
               >
                 Restart
@@ -133,12 +133,12 @@ export function MyPlan() {
       </div>
 
       <div className="sp-card">
-        <div className="sp-card__title">Other plans</div>
+        <div className="sp-card__title">More courses</div>
         <div className="sp-plan-grid">
           {PLANS.filter((p) => p.id !== viewingId).map((p) => {
             const progress = planState(state, p.id)
             return (
-              <button key={p.id} type="button" className="sp-plan-card" onClick={() => navigate(`#/plan?plan=${p.id}`)}>
+              <button key={p.id} type="button" className="sp-plan-card" onClick={() => navigate(`#/learning/courses?plan=${p.id}`)}>
                 <div className="sp-plan-card__title">{p.title}</div>
                 <div className="sp-plan-card__meta">
                   {p.book} · {p.days.length} days
@@ -157,8 +157,4 @@ export function MyPlan() {
       </div>
     </Screen>
   )
-}
-
-export function planTitle(planId: string): string {
-  return getPlan(planId).title
 }

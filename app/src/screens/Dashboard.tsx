@@ -128,7 +128,7 @@ const ACTIVITY_ICON: Record<ActivityKind, { tint: string; color: string; glyph: 
 const TOOLS = [
   {
     label: 'Study Bible',
-    href: '#/library',
+    href: '#/library/bible',
     color: '#1E6B45',
     glyph: (
       <>
@@ -139,7 +139,7 @@ const TOOLS = [
   },
   {
     label: 'Commentaries',
-    href: '#/tools/commentaries',
+    href: '#/library/tools/commentaries',
     color: '#D9A22E',
     glyph: (
       <>
@@ -150,7 +150,7 @@ const TOOLS = [
   },
   {
     label: 'Bible Maps',
-    href: '#/tools/maps',
+    href: '#/library/tools/maps',
     color: '#3D6491',
     glyph: (
       <>
@@ -161,7 +161,7 @@ const TOOLS = [
   },
   {
     label: 'Dictionary',
-    href: '#/tools/dictionary',
+    href: '#/library/tools/dictionary',
     color: '#E8862E',
     glyph: (
       <>
@@ -196,7 +196,7 @@ export function Dashboard() {
 
   const nextHref = plan.nextDay
     ? readerHref(plan.nextDay.book, plan.nextDay.chapter, { verse: plan.nextDay.from, day: plan.nextDay.id })
-    : '#/plan'
+    : '#/learning/courses'
 
   const encouragement =
     percent >= 100
@@ -328,7 +328,7 @@ export function Dashboard() {
         <section style={CARD}>
           <div style={RULED_HEAD}>
             <div style={CARD_TITLE}>Continue Your Plan</div>
-            <div onClick={() => navigate('#/plan')} style={{ fontSize: '14px', fontWeight: '500', color: '#D97B2E', cursor: 'pointer' }}>
+            <div onClick={() => navigate('#/learning/courses')} style={{ fontSize: '14px', fontWeight: '500', color: '#D97B2E', cursor: 'pointer' }}>
               View Plan
             </div>
           </div>
@@ -421,7 +421,7 @@ export function Dashboard() {
         <section style={{ ...CARD, padding: '24px 26px 12px' }}>
           <div style={RULED_HEAD}>
             <div style={CARD_TITLE}>Recent Activity</div>
-            <div onClick={() => navigate('#/progress')} style={{ fontSize: '14px', fontWeight: '500', color: '#D97B2E', cursor: 'pointer' }}>
+            <div onClick={() => navigate('#/learning/progress')} style={{ fontSize: '14px', fontWeight: '500', color: '#D97B2E', cursor: 'pointer' }}>
               View All
             </div>
           </div>
@@ -578,8 +578,8 @@ export function Dashboard() {
                 onClick={() => {
                   dispatch({ type: 'plan/activate', planId: p.id })
                   setPlansOpen(false)
-                  toast(`${p.title} is now your plan`)
-                  navigate('#/plan')
+                  toast(`You are enrolled in ${p.title}`)
+                  navigate('#/learning/courses')
                 }}
               >
                 <div className="sp-plan-card__title">{p.title}</div>
@@ -588,7 +588,7 @@ export function Dashboard() {
                 </div>
                 <div className="sp-plan-card__for">{p.forWhom}</div>
                 <div className="sp-plan-card__summary">{p.summary}</div>
-                {p.id === state.activePlanId && <div className="sp-plan-card__badge">Current plan</div>}
+                {p.id === state.activePlanId && <div className="sp-plan-card__badge">Current course</div>}
               </button>
             ))}
           </div>

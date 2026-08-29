@@ -1465,3 +1465,123 @@ button {
   color: var(--muted);
   margin-top: 4px;
 }
+
+/* ------------------------------------------------------------- sub-nav */
+
+.sp-nav {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-right: -6px;
+  padding-right: 6px;
+}
+
+.sp-subnav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 4px 0 6px 26px;
+  padding-left: 13px;
+  border-left: 1.5px solid var(--border);
+}
+
+.sp-subnav__row {
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.sp-subnav__row:hover {
+  background: #f5f2ea;
+  color: var(--ink-2);
+}
+
+.sp-subnav__row--on {
+  background: var(--tint-green);
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------- continue learning */
+
+.sp-resume {
+  background: var(--surface-warm);
+}
+
+.sp-resume__eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+
+.sp-resume__title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 8px;
+}
+
+.sp-resume__ref {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-mid);
+  margin-top: 6px;
+}
+
+.sp-resume__prompt {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 14px 0 0;
+  max-width: 62ch;
+}
+
+.sp-revisit {
+  display: flex;
+  flex-direction: column;
+}
+
+.sp-revisit__item {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #f2efe7;
+  background: none;
+  padding: 13px 4px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sp-revisit__item:last-child {
+  border-bottom: 0;
+}
+
+.sp-revisit__item:hover {
+  background: #faf8f3;
+}
+
+.sp-revisit__day {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 46px;
+}
+
+.sp-revisit__title {
+  flex: 1;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.sp-revisit__ref {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orange-ink);
+}
