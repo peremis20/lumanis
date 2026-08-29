@@ -1735,6 +1735,19 @@ button {
     max-width: none;
   }
 
+  /* A button that fills its column at the design's width becomes absurdly
+     wide once that column is the whole screen, so cap it back to its label. */
+  .sp-cta-block {
+    align-self: flex-start;
+    padding: 0 26px;
+  }
+
+  .sp-btn--block {
+    width: auto;
+    align-self: flex-start;
+    min-width: 200px;
+  }
+
   .sp-plan-head,
   .sp-entry__head {
     flex-direction: column;

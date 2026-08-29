@@ -257,7 +257,7 @@ export function Dashboard() {
                 {encouragement}
               </div>
               <div
-                className="hv-12"
+                className="hv-12 sp-cta-block"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => e.key === 'Enter' && navigate(nextHref)}
