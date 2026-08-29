@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url'
 const here = dirname(fileURLToPath(import.meta.url))
 const DESIGN = resolve(here, '../../project/Dashboard.dc.html')
 const OUT_DIR = resolve(here, '../../standalone')
-const OUT = resolve(OUT_DIR, 'index.html')
+const OUT = resolve(OUT_DIR, 'design-reference.html')
 
 const src = readFileSync(DESIGN, 'utf8')
 const open = /<x-dc(?:\s[^>]*)?>/.exec(src)
@@ -106,4 +106,4 @@ ${html}
 
 mkdirSync(OUT_DIR, { recursive: true })
 writeFileSync(OUT, page)
-console.log(`standalone/index.html: ${page.length} bytes, ${hoverRules.length} hover rules`)
+console.log(`standalone/design-reference.html: ${page.length} bytes, ${hoverRules.length} hover rules`)

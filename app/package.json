@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "generate": "node scripts/generate-dashboard.mjs",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:single": "vite build --config vite.single.config.ts && node scripts/build-single-file.mjs",
+    "generate:reference": "node scripts/generate-standalone.mjs"
   },
   "dependencies": {
+    "es-kjv": "^1.0.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
