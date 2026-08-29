@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #FBFAF6; }
+  * { box-sizing: border-box; }
+  a { color: #16452F; text-decoration: none; }
+  a:hover { color: #D97B2E; }
+  input { font-family: inherit; }
+  ::placeholder { color: #A09A8E; }
+</style>
+</helmet>
+<div style="display:flex;min-height:100vh;font-family:'DM Sans',sans-serif;color:#22201C;background:#FBFAF6">
+
+  <aside style="width:258px;flex:none;background:#FFFFFF;border-right:1px solid #ECE7DC;display:flex;flex-direction:column;padding:26px 20px 18px;gap:26px">
+    <div style="display:flex;align-items:center;gap:11px;padding-left:6px">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E6B45" stroke-width="1.7" stroke-linecap="round"><path d="M12 21c0-7 3-12 9-14-1 9-4 13-9 14z" fill="#2E8B57" stroke="none"></path><path d="M12 21C7 19 3 14 3 6c5 1 8 5 9 9" fill="#1E6B45" stroke="none"></path><path d="M12 21v-8"></path></svg>
+      <div>
+        <div style="font-family:'Source Serif 4',serif;font-size:20px;font-weight:700;color:#16452F;letter-spacing:-0.2px">ScripturePath</div>
+        <div style="font-size:11px;color:#8B8579;margin-top:1px">Study. Grow. Live.</div>
+      </div>
+    </div>
+
+    <nav style="display:flex;flex-direction:column;gap:4px">
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;background:#16452F;color:#FFFFFF;font-size:14.5px;font-weight:500;cursor:pointer">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V20h14V9.5"></path></svg>
+        Dashboard
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        My Plan
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4z"></path><path d="M20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"></path></svg>
+        Bible Library
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"></path></svg>
+        Study Tools
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 3 8-8"></path><path d="M16 6h5v5"></path></svg>
+        Progress
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"></path></svg>
+        Notes &amp; Highlights
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l2.5 5.2 5.5.8-4 3.9 1 5.6-5-2.9-5 2.9 1-5.6-4-3.9 5.5-.8z"></path></svg>
+        Favorites
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"></path><path d="M16 6.5a2.8 2.8 0 0 1 0 5.4M17 14.5c2.4.6 4 2.3 4 4.5"></path></svg>
+        Community
+      </div>
+      <div style="display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:11px;color:#3F3B34;font-size:14.5px;font-weight:500;cursor:pointer" style-hover="background:#F5F2EA">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2.5M12 18.5V21M4.2 7.5l2.2 1.3M17.6 15.2l2.2 1.3M4.2 16.5l2.2-1.3M17.6 8.8l2.2-1.3"></path></svg>
+        Settings
+      </div>
+    </nav>
+
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:18px">
+      <div style="border:1px solid #ECE7DC;border-radius:14px;padding:17px 18px 15px;background:#FFFDF9">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-family:'Source Serif 4',serif;font-size:15.5px;font-weight:600;color:#22201C">Verse of the Day</div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E89B3C" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6 18 18M6 18l1.4-1.4M16.6 7.4 18 6"></path></svg>
+        </div>
+        <div style="font-size:14px;line-height:1.55;color:#3F3B34;text-wrap:pretty">Your word is a lamp to my feet and a light to my path.</div>
+        <div style="font-size:12.5px;color:#8B8579;margin-top:11px">Psalm 119:105</div>
+        <div style="display:flex;align-items:center;gap:0;justify-content:space-between;margin-top:16px">
+          <svg width="19" height="19" viewBox="0 0 24 24" stroke="#D97B2E" stroke-width="1.8" stroke-linecap="round" onClick="{{ toggleFavorite }}" style="cursor:pointer" fill="{{ heartFill }}"><path d="M12 20s-7-4.4-7-9.2A3.8 3.8 0 0 1 12 8a3.8 3.8 0 0 1 7 2.8C19 15.6 12 20 12 20z"></path></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C7566" stroke-width="1.8" stroke-linecap="round" style="cursor:pointer"><circle cx="18" cy="5.5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="18.5" r="2.5"></circle><path d="M8.3 10.8 15.7 6.8M8.3 13.2l7.4 4"></path></svg>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid #ECE7DC;cursor:pointer">
+        <div style="width:42px;height:42px;flex:none;border-radius:50%;overflow:hidden;background:#EEEAE0">
+          <image-slot id="avatar" shape="circle" placeholder="Avatar" style="width:42px;height:42px"></image-slot>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:14.5px;font-weight:600;color:#22201C">{{ userName }}</div>
+          <div style="font-size:12.5px;color:#8B8579">Edit Profile</div>
+        </div>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8B8579" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"></path></svg>
+      </div>
+    </div>
+  </aside>
+
+  <main style="flex:1;min-width:1120px;padding:34px 44px 44px;display:flex;flex-direction:column;gap:26px">
+
+    <header style="display:flex;align-items:flex-start;gap:24px">
+      <div style="flex:1;min-width:0">
+        <h1 style="margin:0;font-family:'Source Serif 4',serif;font-size:31px;font-weight:600;letter-spacing:-0.4px;color:#16452F;white-space:nowrap">Good morning, {{ userName }} 👋</h1>
+        <div style="margin-top:8px;font-size:14.5px;color:#6E6A62">Keep seeking. Keep growing. God is with you.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding-top:4px">
+        <div style="display:flex;align-items:center;gap:10px;width:256px;height:46px;padding:0 16px;background:#FFFFFF;border:1px solid #ECE7DC;border-radius:11px">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8B8579" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
+          <input placeholder="Search..." style="flex:1;border:none;outline:none;background:transparent;font-size:14px;color:#22201C" />
+        </div>
+        <div style="position:relative;cursor:pointer;padding:4px">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3F3B34" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 14 6 10z"></path><path d="M10 19a2.2 2.2 0 0 0 4 0"></path></svg>
+          <div style="position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#E07A2F;border:1.5px solid #FBFAF6"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;height:46px;padding:0 20px;background:#16452F;color:#FFFFFF;border-radius:11px;font-size:14.5px;font-weight:600;cursor:pointer" style-hover="background:#0F3222">
+          New Study
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+        </div>
+      </div>
+    </header>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+
+      <section style="background:#FFFFFF;border:1px solid #ECE7DC;border-radius:16px;padding:24px 26px 26px">
+        <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:#22201C">Today's Progress</div>
+        <div style="display:flex;align-items:center;gap:26px;margin-top:20px">
+          <div style="position:relative;width:172px;height:172px;flex:none">
+            <svg width="172" height="172" viewBox="0 0 172 172" style="transform:rotate(-90deg)">
+              <circle cx="86" cy="86" r="76" fill="none" stroke="#EDEAE1" stroke-width="15"></circle>
+              <circle cx="86" cy="86" r="76" fill="none" stroke="#16452F" stroke-width="15" stroke-linecap="round" stroke-dasharray="{{ ringDash }}"></circle>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="font-family:'Source Serif 4',serif;font-size:38px;font-weight:600;color:#16452F;line-height:1">{{ percentLabel }}<span style="font-size:20px">%</span></div>
+              <div style="font-size:12.5px;color:#8B8579;margin-top:6px">Daily Goal</div>
+            </div>
+          </div>
+          <div style="flex:1;min-width:0;border-left:1px solid #ECE7DC;padding-left:26px;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3F3B34" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5V12l3 2"></path></svg>
+              <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;font-size:14px;color:#3F3B34">Time Studied<span style="font-weight:700;color:#22201C">25 min</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:14px;color:#3F3B34">Verses Studied<span style="font-weight:700;color:#22201C">12</span></div>
+              </div>
+            </div>
+            <div style="border-top:1px solid #ECE7DC;padding-top:16px;font-size:14px;line-height:1.55;color:#3F3B34;text-wrap:pretty">Keep it up! You're building something that lasts.</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;height:50px;background:#16452F;color:#FFFFFF;border-radius:11px;font-size:15px;font-weight:600;cursor:pointer" style-hover="background:#0F3222">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"></path><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"></path></svg>
+              Continue Study
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#FFFFFF;border:1px solid #ECE7DC;border-radius:16px;padding:24px 26px 26px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:#22201C">Weekly Progress</div>
+          <div style="font-size:14px;font-weight:700;color:#D97B2E">4 of 7 days</div>
+        </div>
+        <div style="margin-top:10px;font-size:14px;color:#6E6A62">You're on fire! 🔥 Keep showing up.</div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:26px">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#E8862E;display:flex;align-items:center;justify-content:center">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+            </div>
+            <div style="font-size:12.5px;color:#3F3B34">Mon</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#E8862E;display:flex;align-items:center;justify-content:center">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+            </div>
+            <div style="font-size:12.5px;color:#3F3B34">Tue</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#E8862E;display:flex;align-items:center;justify-content:center">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+            </div>
+            <div style="font-size:12.5px;color:#3F3B34">Wed</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#E8862E;display:flex;align-items:center;justify-content:center">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+            </div>
+            <div style="font-size:12.5px;color:#3F3B34">Thu</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1.8px solid #DAD5C9"></div>
+            <div style="font-size:12.5px;color:#3F3B34">Fri</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1.8px solid #EAE5DA"></div>
+            <div style="font-size:12.5px;color:#8B8579">Sat</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1.8px solid #EAE5DA"></div>
+            <div style="font-size:12.5px;color:#8B8579">Sun</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:26px;padding:16px 20px;background:#FDF3E7;border-radius:12px">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8862E" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="3.5"></circle><path d="M12 12l7-7"></path></svg>
+          <div style="flex:1">
+            <div style="font-size:14.5px;font-weight:600;color:#22201C">Weekly Goal</div>
+            <div style="font-size:13px;color:#6E6A62;margin-top:2px">5 days per week</div>
+          </div>
+          <div style="font-size:14px;font-weight:500;color:#3F3B34;cursor:pointer" style-hover="color:#D97B2E">Edit Goal</div>
+        </div>
+      </section>
+
+      <section style="background:#FFFFFF;border:1px solid #ECE7DC;border-radius:16px;padding:24px 26px 26px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:20px;border-bottom:1px solid #ECE7DC">
+          <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:#22201C">Continue Your Plan</div>
+          <div style="font-size:14px;font-weight:500;color:#D97B2E;cursor:pointer">View Plan</div>
+        </div>
+        <div style="display:flex;gap:22px;margin-top:22px">
+          <image-slot id="plan-cover" shape="rounded" radius="12" placeholder="Plan cover" style="width:94px;height:140px;flex:none"></image-slot>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+            <div style="font-family:'Source Serif 4',serif;font-size:20px;font-weight:600;color:#22201C">Peace for Anxious Hearts</div>
+            <div style="font-size:14px;color:#6E6A62;margin-top:5px">Philippians · Guided, Level 2</div>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:22px">
+              <div style="flex:1;height:8px;border-radius:99px;background:#EDEAE1;overflow:hidden">
+                <div style="width:60%;height:100%;border-radius:99px;background:#16452F"></div>
+              </div>
+              <div style="font-size:13.5px;font-weight:600;color:#3F3B34">60%</div>
+            </div>
+            <div style="font-size:13.5px;color:#3F3B34;margin-top:14px">Next: Philippians 4:4–9</div>
+            <div style="display:flex;justify-content:flex-end;margin-top:auto;padding-top:18px">
+              <div style="display:flex;align-items:center;gap:9px;height:44px;padding:0 22px;background:#16452F;color:#FFFFFF;border-radius:10px;font-size:14.5px;font-weight:600;cursor:pointer" style-hover="background:#0F3222">
+                Continue
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l12 8-12 8z"></path></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#FFFFFF;border:1px solid #ECE7DC;border-radius:16px;padding:24px 26px 26px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:20px;border-bottom:1px solid #ECE7DC">
+          <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:#22201C">Your Stats</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:#3F3B34;cursor:pointer">
+            This Month
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8B8579" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"></path></svg>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px">
+          <div style="display:flex;align-items:center;gap:15px;padding:18px;border:1px solid #EFEBE2;border-radius:12px">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:#EAF1EC;display:flex;align-items:center;justify-content:center">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1E6B45" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"></path><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"></path></svg>
+            </div>
+            <div>
+              <div style="font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:#22201C;line-height:1.1">8</div>
+              <div style="font-size:13px;color:#6E6A62;margin-top:4px">Chapters Studied</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:15px;padding:18px;border:1px solid #EFEBE2;border-radius:12px">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:#FDF1E4;display:flex;align-items:center;justify-content:center">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#E8862E" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>
+            </div>
+            <div>
+              <div style="font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:#22201C;line-height:1.1">3h 15m</div>
+              <div style="font-size:13px;color:#6E6A62;margin-top:4px">Time Studied</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:15px;padding:18px;border:1px solid #EFEBE2;border-radius:12px">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:#FDF6E7;display:flex;align-items:center;justify-content:center">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#D9A22E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"></path></svg>
+            </div>
+            <div>
+              <div style="font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:#22201C;line-height:1.1">14</div>
+              <div style="font-size:13px;color:#6E6A62;margin-top:4px">Notes Created</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:15px;padding:18px;border:1px solid #EFEBE2;border-radius:12px">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:#FDF6E7;display:flex;align-items:center;justify-content:center">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#D9A22E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l2.5 5.2 5.5.8-4 3.9 1 5.6-5-2.9-5 2.9 1-5.6-4-3.9 5.5-.8z"></path></svg>
+            </div>
+            <div>
+              <div style="font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:#22201C;line-height:1.1">7</div>
+              <div style="font-size:13px;color:#6E6A62;margin-top:4px">Highlights</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#FFFFFF;border:1px solid #ECE7DC;border-radius:16px;padding:24px 26px 12px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:20px;border-bottom:1px solid #ECE7DC">
+          <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:#22201C">Recent Activity</div>
+          <div style="font-size:14px;font-weight:500;color:#D97B2E;cursor:pointer">View All</div>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #F2EFE7;cursor:pointer">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:#EAF1EC;display:flex;align-items:center;justify-content:center">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1E6B45" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"></path><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"></path></svg>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:14.5px;font-weight:600;color:#22201C">Read Philippians 4:1–7</div>
+              <div style="font-size:13px;color:#8B8579;margin-top:4px">Today, 8:30 AM</div>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A09A8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #F2EFE7;cursor:pointer">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:#FDF6E7;display:flex;align-items:center;justify-content:center">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#D9A22E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"></path></svg>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:14.5px;font-weight:600;color:#22201C">Highlighted Philippians 4:6</div>
+              <div style="font-size:13px;color:#8B8579;margin-top:4px">Today, 8:15 AM</div>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A09A8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:18px 0;cursor:pointer">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:#EAEFF6;display:flex;align-items:center;justify-content:center">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3D6491" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="3"></rect><path d="M8 9h8M8 13h8M8 17h4"></path></svg>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:14.5px;font-weight:600;color:#22201C">Added a note on Philippians 4:6</div>
+              <div style="font-size:13px;color:#8B8579;margin-top:4px">Yesterday, 10:45 PM</div>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A09A8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"></path></svg>
+          </div>
+        </div>
+      </section>
+
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <section style="background:#FFFFFF;border:1px solid #ECE7DC;border-radius:16px;padding:24px 26px 26px">
+          <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:#22201C;padding-bottom:20px;border-bottom:1px solid #ECE7DC">Tools Quick Access</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 8px;border:1px solid #EFEBE2;border-radius:12px;cursor:pointer" style-hover="border-color:#16452F">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1E6B45" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"></path><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"></path></svg>
+              <div style="font-size:13px;font-weight:500;color:#3F3B34;text-align:center">Study Bible</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 8px;border:1px solid #EFEBE2;border-radius:12px;cursor:pointer" style-hover="border-color:#16452F">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D9A22E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l3 3v13H6z"></path><path d="M9 9h6M9 13h6M9 17h3"></path></svg>
+              <div style="font-size:13px;font-weight:500;color:#3F3B34;text-align:center">Commentaries</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 8px;border:1px solid #EFEBE2;border-radius:12px;cursor:pointer" style-hover="border-color:#16452F">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3D6491" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-6.2 6.5-11a6.5 6.5 0 1 0-13 0C5.5 14.8 12 21 12 21z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>
+              <div style="font-size:13px;font-weight:500;color:#3F3B34;text-align:center">Bible Maps</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 8px;border:1px solid #EFEBE2;border-radius:12px;cursor:pointer" style-hover="border-color:#16452F">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8862E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h8l4 4v13H6z"></path><path d="M9.5 11.5h5M9.5 15h3"></path></svg>
+              <div style="font-size:13px;font-weight:500;color:#3F3B34;text-align:center">Dictionary</div>
+            </div>
+          </div>
+        </section>
+
+        <section style="display:flex;align-items:center;gap:24px;background:#123A28;border-radius:16px;padding:26px 30px">
+          <image-slot id="plant" shape="rounded" radius="10" placeholder="Illustration" style="width:104px;height:104px;flex:none"></image-slot>
+          <div style="flex:1;min-width:0">
+            <div style="font-family:'Source Serif 4',serif;font-size:20px;font-weight:600;color:#FFFFFF">Stay rooted in the Word</div>
+            <div style="font-size:14px;line-height:1.55;color:#C8D8CD;margin-top:8px;text-wrap:pretty">The more time you spend in God's Word, the more it transforms your life.</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border:1.5px solid rgba(255,255,255,0.35);border-radius:10px;color:#FFFFFF;font-size:14.5px;font-weight:600;cursor:pointer;flex:none" style-hover="background:rgba(255,255,255,0.1)">Explore Plans</div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;userName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Michael&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;dailyGoalPercent&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:75,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { favorite: false };
+  renderVals() {
+    const pct = Math.max(0, Math.min(100, this.props.dailyGoalPercent ?? 75));
+    const c = 2 * Math.PI * 76;
+    return {
+      userName: this.props.userName ?? 'Michael',
+      percentLabel: Math.round(pct),
+      ringDash: (c * pct / 100).toFixed(1) + ' ' + c.toFixed(1),
+      heartFill: this.state.favorite ? '#D97B2E' : 'none',
+      toggleFavorite: () => this.setState(s => ({ favorite: !s.favorite })),
+    };
+  }
+}
+</script>
+</body>
+</html>
